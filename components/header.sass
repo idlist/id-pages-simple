@@ -1,0 +1,44 @@
+.header
+  display: flex
+  column-gap: 2rem
+  justify-content: center
+
+.header-icon
+    border: 1px solid #333
+    border-radius: 50%
+
+.header-icon-image
+    width: 10rem
+    height: 10rem
+
+.contact-list
+  min-height: 10rem
+
+  display: grid
+  row-gap: 0.5rem
+  align-items: center
+  align-content: center
+
+.contact-list-item
+  display: flex
+  column-gap: 0.5rem
+  align-items: center
+
+  color: #333
+  text-decoration: none
+
+  .item-icon
+    width: 1.5rem
+    height: 1.5rem
+
+  .item-name, .item-dash
+    font-size: 0.875rem
+
+  .item-name
+    color: #666
+
+  .item-id
+    text-decoration: underline
+
+  &:hover .item-id
+    color: #999

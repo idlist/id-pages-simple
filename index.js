@@ -1,5 +1,5 @@
 import m from 'mithril'
 import './index.sass'
-import Test from './components/test'
+import RootLayout from './components/root-layout'
 
-m.mount(document.getElementById('root'), Test)
+m.mount(document.getElementById('root'), RootLayout)
