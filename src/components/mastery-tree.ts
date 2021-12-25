@@ -1,7 +1,7 @@
 import m from 'mithril'
-import './mastery-list.sass'
+import './mastery-tree.sass'
 
-const MasteryList = () => {
+const TechnologyTree: m.ClosureComponent = () => {
   return {
     view() {
       return [
@@ -11,4 +11,4 @@ const MasteryList = () => {
   }
 }
 
-export default MasteryList
+export default TechnologyTree

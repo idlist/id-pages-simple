@@ -1,9 +1,16 @@
 import m from 'mithril'
 import './header.sass'
-import image_idlist from './assets/idlist.png'
-import icon_twitter from './assets/icons/twitter.svg'
+import image_idlist from '@assets/idlist.png'
+import icon_twitter from '@assets/icons/twitter.svg'
 
-const ContactListItem = () => {
+interface ContactListItemAttrs {
+  name: string
+  icon: string
+  id: string
+  link: string
+}
+
+const ContactListItem: m.ClosureComponent<ContactListItemAttrs> = () => {
   return {
     view({ attrs }) {
       return [
@@ -30,7 +37,7 @@ const ContactListItem = () => {
   }
 }
 
-const ContactListContents = [
+const ContactListContents: ContactListItemAttrs[] = [
   {
     name: 'Twitter',
     icon: icon_twitter,
@@ -39,7 +46,7 @@ const ContactListContents = [
   }
 ]
 
-const Header = () => {
+const Header: m.ClosureComponent = () => {
   return {
     view() {
       return [

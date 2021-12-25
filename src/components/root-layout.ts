@@ -1,15 +1,15 @@
 import m from 'mithril'
 import './root-layout.sass'
 import Header from './header'
-import MasteryList from './mastery-list'
+import MasteryTree from './mastery-tree'
 
-const RootLayout = () => {
+const RootLayout: m.ClosureComponent = () => {
   return {
     view() {
       return [
         m('div', { class: 'container' }, [
           m(Header),
-          m(MasteryList)
+          m(MasteryTree)
         ])
       ]
     }
