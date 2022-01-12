@@ -1,13 +1,18 @@
 import m from 'mithril'
 import './header.sass'
 import image_idlist from '@assets/idlist.png'
+import icon_email from '@assets/icons/email.svg'
+import icon_blog from '@assets/icons/blog.svg'
 import icon_twitter from '@assets/icons/twitter.svg'
+import icon_github from '@assets/icons/github.svg'
+import icon_soundcloud from '@assets/icons/soundcloud.svg'
 
 interface ContactListItemAttrs {
   name: string
   icon: string
   id: string
   link: string
+  external?: boolean
 }
 
 const ContactListItem: m.ClosureComponent<ContactListItemAttrs> = () => {
@@ -17,7 +22,7 @@ const ContactListItem: m.ClosureComponent<ContactListItemAttrs> = () => {
         m('a', {
           class: 'contact-list-item',
           href: attrs.link,
-          target: '_blank',
+          target: 'external' in attrs ? (attrs.external ? '_blank' : '_self') : '_blank',
           noreferer: true,
           noopener: true
         }, [
@@ -39,10 +44,38 @@ const ContactListItem: m.ClosureComponent<ContactListItemAttrs> = () => {
 
 const ContactListContents: ContactListItemAttrs[] = [
   {
+    name: 'Email',
+    icon: icon_email,
+    id: 'me@idl.ist',
+    link: 'mailto:me@idl.ist',
+    external: false
+  },
+  {
+    name: 'Blog',
+    icon: icon_blog,
+    id: 'Reinventing the Wheel',
+    link: 'https://blog.idl.ist/'
+  }
+]
+
+const SocialMediaContents: ContactListItemAttrs[] = [
+  {
     name: 'Twitter',
     icon: icon_twitter,
     id: '@i_dlist',
     link: 'https://twitter.com/i_dlist'
+  },
+  {
+    name: 'GitHub',
+    icon: icon_github,
+    id: 'i\'DLisT',
+    link: 'https://github.com/idlist'
+  },
+  {
+    name: 'SoundCloud',
+    icon: icon_soundcloud,
+    id: 'i\'DLisT',
+    link: 'https://soundcloud.com/idlist'
   }
 ]
 
@@ -58,9 +91,15 @@ const Header: m.ClosureComponent = () => {
               alt: 'idlist-icon'
             })
           ]),
-          m('div', { class: 'contact-list' }, ContactListContents.map(item => [
-            m(ContactListItem, { ...item })
-          ]))
+          m('div', { class: 'contact-list' }, [
+            ...ContactListContents.map(item => [
+              m(ContactListItem, { ...item })
+            ]),
+            m('hr', { class: 'contact-list-divider' }),
+            ...SocialMediaContents.map(item => [
+              m(ContactListItem, { ...item })
+            ])
+          ])
         ])
       ]
     }
