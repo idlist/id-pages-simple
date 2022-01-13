@@ -183,58 +183,80 @@ const SkillBar: m.ClosureComponent<SkillLevelAttrs> = () => {
   }
 }
 
-interface MasteryTreeAspectAttrs {
-  aspect: TreeAspect
-}
+type MasteryItemNameAttrs = TreeItem
 
-const MasteryTreeAspect: m.ClosureComponent<MasteryTreeAspectAttrs> = () => {
+const MasteryItemName: m.ClosureComponent<MasteryItemNameAttrs> = () => {
   return {
     view({ attrs }) {
-      const aspect = attrs.aspect
-
       return [
-        m('div', { class: 'aspect' }, [
-          m('div', { class: 'aspect-container' }, [
-            m('div', { class: 'aspect-info' }, [
-              m('div', { class: 'aspect-title' }, aspect.title),
-              aspect.new && [
-                m('div', { class: 'aspect-new' }, 'NEW')
-              ]
-            ]),
-            aspect.level && [
-              m(SkillBar, { level: aspect.level })
+        m('div', attrs.name),
+        attrs.new && [
+          m('div', { class: 'item-new' }, 'NEW')
+        ]
+      ]
+    }
+  }
+}
+
+type MasteryItemAttrs = TreeItem
+
+const MasteryItem: m.ClosureComponent<MasteryItemAttrs> = () => {
+  return {
+    view({ attrs }) {
+      return [
+        m('div', { class: 'item' }, [
+          attrs.link
+            ? [
+              m('a', {
+                class: 'item-link',
+                href: attrs.link,
+                target: '_blank',
+                noreferer: true,
+                noopener: true
+              }, [
+                m(MasteryItemName, { ...attrs })
+              ])
             ]
-          ]),
-          m('div', { class: 'aspect-content' }, [
-            ...aspect.contents.map(item => m(MasteryTreeItem, { item: item }))
-          ])
+            : [
+              m('div', { class: 'item-info' }, [
+                m(MasteryItemName, { ...attrs })
+              ])
+            ]
+          ,
+          m(SkillBar, {
+            level: attrs.level,
+            fav: attrs.fav
+          })
         ])
       ]
     }
   }
 }
 
-interface MasteryTreeItemAttrs {
-  item: TreeItem
-}
+type MasteryTreeAspectAttrs = TreeAspect
 
-const MasteryTreeItem: m.ClosureComponent<MasteryTreeItemAttrs> = () => {
+const MasteryTreeAspect: m.ClosureComponent<MasteryTreeAspectAttrs> = () => {
   return {
     view({ attrs }) {
-      const item = attrs.item
-
       return [
-        m('div', { class: 'item' }, [
-          m('div', { class: 'item-info' }, [
-            m('div', item.name),
-            item.new && [
-              m('div', { class: 'item-new' }, 'NEW')
+        m('div', { class: 'aspect' }, [
+          m('div', {
+            class: 'aspect-container',
+            style: { backgroundColor: attrs.color }
+          }, [
+            m('div', { class: 'aspect-info' }, [
+              m('div', { class: 'aspect-title' }, attrs.title),
+              attrs.new && [
+                m('div', { class: 'aspect-new' }, 'NEW')
+              ]
+            ]),
+            attrs.level && [
+              m(SkillBar, { level: attrs.level })
             ]
           ]),
-          m(SkillBar, {
-            level: item.level,
-            fav: item.fav
-          })
+          m('div', { class: 'aspect-content' }, [
+            ...attrs.contents.map(item => m(MasteryItem, { ...item }))
+          ])
         ])
       ]
     }
@@ -246,7 +268,7 @@ const MasteryTree: m.ClosureComponent = () => {
     view() {
       return [
         m('div', { class: 'mastery-tree' }, [
-          ...TreeList.map(aspect => m(MasteryTreeAspect, { aspect: aspect }))
+          ...TreeList.map(aspect => m(MasteryTreeAspect, { ...aspect }))
         ])
       ]
     }
