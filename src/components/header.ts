@@ -12,6 +12,7 @@ interface ContactListItemAttrs {
   icon: string
   id: string
   link: string
+  color: string
   external?: boolean
 }
 
@@ -33,7 +34,10 @@ const ContactListItem: m.ClosureComponent<ContactListItemAttrs> = () => {
               alt: attrs.name
             })
           ]),
-          m('div', { class: 'item-name' }, attrs.name),
+          m('div', {
+            class: 'item-name',
+            style: { backgroundColor: attrs.color }
+          }, attrs.name),
           m('div', { class: 'item-id' }, attrs.id)
         ])
       ]
@@ -47,11 +51,13 @@ const ContactListContents: ContactListItemAttrs[] = [
     icon: icon_email,
     id: 'me@idl.ist',
     link: 'mailto:me@idl.ist',
+    color: '#3A8FB7',
     external: false
   },
   {
     name: 'Blog',
     icon: icon_blog,
+    color: '#00896C',
     id: 'Reinventing the Wheel',
     link: 'https://blog.idl.ist/'
   }
@@ -62,11 +68,13 @@ const SocialMediaContents: ContactListItemAttrs[] = [
     name: 'Twitter',
     icon: icon_twitter,
     id: '@i_dlist',
+    color: '#58B2DC',
     link: 'https://twitter.com/i_dlist'
   },
   {
     name: 'GitHub',
     icon: icon_github,
+    color: '#66327C',
     id: 'i\'DLisT',
     link: 'https://github.com/idlist'
   },
@@ -74,6 +82,7 @@ const SocialMediaContents: ContactListItemAttrs[] = [
     name: 'SoundCloud',
     icon: icon_soundcloud,
     id: 'i\'DLisT',
+    color: '#ED784A',
     link: 'https://soundcloud.com/idlist'
   }
 ]

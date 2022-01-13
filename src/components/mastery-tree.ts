@@ -1,8 +1,10 @@
 import m from 'mithril'
 import './mastery-tree.sass'
+import svg_star from '@assets/skill-bar/star.svg'
+import svg_heart from '@assets/skill-bar/heart.svg'
 
 interface TreeItem {
-  item: string
+  name: string
   level: number
   icon?: string
   new?: boolean
@@ -10,7 +12,7 @@ interface TreeItem {
   link?: string
 }
 
-interface TreeNode {
+interface TreeAspect {
   title: string
   color?: string,
   level?: number
@@ -18,20 +20,20 @@ interface TreeNode {
   contents: TreeItem[]
 }
 
-const TreeList: TreeNode[] = [
+const TreeList: TreeAspect[] = [
   {
     title: 'Language',
     contents: [
       {
-        item: 'Chinese (native language)',
+        name: 'Chinese (native)',
         level: 5
       },
       {
-        item: 'English',
+        name: 'English',
         level: 4
       },
       {
-        item: 'Japanese',
+        name: 'Japanese',
         level: 3
       }
     ]
@@ -41,28 +43,28 @@ const TreeList: TreeNode[] = [
     level: 4.5,
     contents: [
       {
-        item: 'Mithril.js',
-        level: 4.5,
+        name: 'Mithril.js',
+        level: 4,
         fav: true,
         link: 'https://mithril.js.org/'
       },
       {
-        item: 'React',
+        name: 'React',
         level: 3,
         link: 'https://reactjs.org/'
       },
       {
-        item: 'Vue.js',
+        name: 'Vue.js',
         level: 1,
         link: 'https://v3.vuejs.org/'
       },
       {
-        item: 'Vite',
+        name: 'Vite',
         level: 3,
         link: 'https://vitejs.dev/'
       },
       {
-        item: 'Koishi.js',
+        name: 'Koishi.js',
         level: 4.5,
         fav: true,
         link: 'https://koishi.js.org/'
@@ -75,7 +77,7 @@ const TreeList: TreeNode[] = [
     new: true,
     contents: [
       {
-        item: 'Godot',
+        name: 'Godot',
         level: 1,
         new: true,
         fav: true,
@@ -88,17 +90,17 @@ const TreeList: TreeNode[] = [
     level: 3,
     contents: [
       {
-        item: 'Digital Art',
+        name: 'Digital Art',
         level: 1,
         fav: true
       },
       {
-        item: 'UI',
+        name: 'UI',
         level: 3,
         fav: true
       },
       {
-        item: 'Vector Graphics',
+        name: 'Vector Graphics',
         level: 2
       }
     ]
@@ -108,7 +110,7 @@ const TreeList: TreeNode[] = [
     level: 2,
     contents: [
       {
-        item: 'Ableton Live',
+        name: 'Ableton Live',
         level: 2,
         link: 'https://www.ableton.com/en/live/'
       }
@@ -116,11 +118,84 @@ const TreeList: TreeNode[] = [
   }
 ]
 
+interface SkillLevelAttrs {
+  level: number
+  fav?: boolean
+  width?: number
+}
+
+const SkillBar: m.ClosureComponent<SkillLevelAttrs> = () => {
+  return {
+    view({ attrs }) {
+      const width = attrs.width ?? 400
+      const height = 24
+      const margin = 12
+      const length = width - 2 * margin
+
+      const lineStyle = { stroke: '#ccc', strokeWidth: 2 }
+      const pointStyle = { fill: '#ccc' }
+
+      return [
+        m('svg', {
+          width: width, height: height,
+          class: 'skill-level'
+        }, [
+          m('line', {
+            x1: margin, y1: margin,
+            x2: width - margin, y2: margin,
+            style: lineStyle
+          }),
+          ...[0, 1].map(i => [
+            m('line', {
+              x1: margin + length * i, y1: 4,
+              x2: margin + length * i, y2: 20,
+              style: lineStyle
+            })
+          ]),
+          ...[1, 2, 3, 4].map(i => [
+            m('circle', {
+              cx: margin + length / 5 * i, cy: height / 2, r: 4,
+              style: pointStyle
+            })
+          ]),
+          m('image', {
+            x: margin + length / 5 * attrs.level - 8, y: 4,
+            width: 16, height: 16,
+            href: attrs.fav ? svg_heart : svg_star
+          })
+        ])
+      ]
+    }
+  }
+}
+
 const MasteryTree: m.ClosureComponent = () => {
   return {
     view() {
       return [
-        m('div', { class: 'mastery-list' })
+        m('div', { class: 'mastery-tree' }, [
+          ...TreeList.map(aspect => [
+            m('div', { class: 'aspect' }, [
+              m('div', { class: 'aspect-title' }, aspect.title),
+              aspect.level && [
+                m(SkillBar, {
+                  level: aspect.level
+                })
+              ]
+            ]),
+            m('div', { class: 'aspect-content' }, [
+              ...aspect.contents.map(item => [
+                m('div', { class: 'item' }, [
+                  m('div', item.name),
+                  m(SkillBar, {
+                    level: item.level,
+                    fav: item.fav
+                  })
+                ])
+              ])
+            ])
+          ])
+        ])
       ]
     }
   }
