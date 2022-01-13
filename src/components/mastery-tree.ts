@@ -14,7 +14,7 @@ interface TreeItem {
 
 interface TreeAspect {
   title: string
-  color?: string,
+  color: string,
   level?: number
   new?: boolean
   contents: TreeItem[]
@@ -23,6 +23,7 @@ interface TreeAspect {
 const TreeList: TreeAspect[] = [
   {
     title: 'Language',
+    color: '#9A5034',
     contents: [
       {
         name: 'Chinese (native)',
@@ -41,6 +42,7 @@ const TreeList: TreeAspect[] = [
   {
     title: 'JS / Node.js',
     level: 4.5,
+    color: '#6E552F',
     contents: [
       {
         name: 'Mithril.js',
@@ -75,6 +77,7 @@ const TreeList: TreeAspect[] = [
     title: 'C#',
     level: 1,
     new: true,
+    color: '#096148',
     contents: [
       {
         name: 'Godot',
@@ -88,6 +91,7 @@ const TreeList: TreeAspect[] = [
   {
     title: 'Graphics',
     level: 3,
+    color: '#622954',
     contents: [
       {
         name: 'Digital Art',
@@ -108,6 +112,7 @@ const TreeList: TreeAspect[] = [
   {
     title: 'Desktop Music',
     level: 2,
+    color: '#0B346E',
     contents: [
       {
         name: 'Ableton Live',
