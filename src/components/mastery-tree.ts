@@ -18,8 +18,8 @@ import icon_live from '@assets/skill-icons/live.svg'
 
 interface TreeItem {
   name: string
-  level?: number
   icon?: string
+  level?: number
   new?: boolean
   fav?: boolean
   link?: string

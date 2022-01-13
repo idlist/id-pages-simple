@@ -9,10 +9,10 @@ import icon_soundcloud from '@assets/icons/soundcloud.svg'
 
 interface ContactListItemAttrs {
   name: string
-  icon: string
+  icon?: string
   id: string
   link: string
-  color: string
+  color?: string
   external?: boolean
 }
 
@@ -50,8 +50,8 @@ const ContactListContents: ContactListItemAttrs[] = [
     name: 'Email',
     icon: icon_email,
     id: 'me@idl.ist',
-    link: 'mailto:me@idl.ist',
     color: '#3A8FB7',
+    link: 'mailto:me@idl.ist',
     external: false
   },
   {
@@ -59,7 +59,8 @@ const ContactListContents: ContactListItemAttrs[] = [
     icon: icon_blog,
     color: '#00887d',
     id: 'Reinventing the Wheel',
-    link: 'https://blog.idl.ist/'
+    link: 'https://blog.idl.ist/',
+    external: false
   }
 ]
 
