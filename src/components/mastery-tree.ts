@@ -2,11 +2,24 @@ import m from 'mithril'
 import './mastery-tree.sass'
 import svg_star from '@assets/skill-bar/star.svg'
 import svg_heart from '@assets/skill-bar/heart.svg'
+import icon_chinese from '@assets/skill-icons/chinese.svg'
+import icon_english from '@assets/skill-icons/english.svg'
+import icon_japanese from '@assets/skill-icons/japanese.svg'
+import icon_mithril from '@assets/skill-icons/mithril.svg'
+import icon_react from '@assets/skill-icons/react.svg'
+import icon_vue from '@assets/skill-icons/vue.svg'
+import icon_vite from '@assets/skill-icons/vite.svg'
+import icon_koishi from '@assets/skill-icons/koishi.svg'
+import icon_godot from '@assets/skill-icons/godot.svg'
+import icon_digital_art from '@assets/skill-icons/digital-art.svg'
+import icon_ui from '@assets/skill-icons/ui.svg'
+import icon_vector_graphics from '@assets/skill-icons/vector-graphics.svg'
+import icon_live from '@assets/skill-icons/live.svg'
 
 interface TreeItem {
   name: string
+  icon: string
   level: number
-  icon?: string
   new?: boolean
   fav?: boolean
   link?: string
@@ -27,14 +40,17 @@ const TreeList: TreeAspect[] = [
     contents: [
       {
         name: 'Chinese (native)',
+        icon: icon_chinese,
         level: 5
       },
       {
         name: 'English',
+        icon: icon_english,
         level: 4
       },
       {
         name: 'Japanese',
+        icon: icon_japanese,
         level: 3
       }
     ]
@@ -46,27 +62,32 @@ const TreeList: TreeAspect[] = [
     contents: [
       {
         name: 'Mithril.js',
+        icon: icon_mithril,
         level: 4,
         fav: true,
         link: 'https://mithril.js.org/'
       },
       {
         name: 'React',
+        icon: icon_react,
         level: 3,
         link: 'https://reactjs.org/'
       },
       {
         name: 'Vue.js',
+        icon: icon_vue,
         level: 1,
         link: 'https://v3.vuejs.org/'
       },
       {
         name: 'Vite',
+        icon: icon_vite,
         level: 3,
         link: 'https://vitejs.dev/'
       },
       {
         name: 'Koishi.js',
+        icon: icon_koishi,
         level: 4.5,
         fav: true,
         link: 'https://koishi.js.org/'
@@ -81,6 +102,7 @@ const TreeList: TreeAspect[] = [
     contents: [
       {
         name: 'Godot',
+        icon: icon_godot,
         level: 0.8,
         new: true,
         fav: true,
@@ -95,16 +117,19 @@ const TreeList: TreeAspect[] = [
     contents: [
       {
         name: 'Digital Art',
+        icon: icon_digital_art,
         level: 1,
         fav: true
       },
       {
         name: 'UI',
+        icon: icon_ui,
         level: 3,
         fav: true
       },
       {
         name: 'Vector Graphics',
+        icon: icon_vector_graphics,
         level: 2
       }
     ]
@@ -115,7 +140,8 @@ const TreeList: TreeAspect[] = [
     color: '#0B346E',
     contents: [
       {
-        name: 'Ableton Live',
+        name: 'Live',
+        icon: icon_live,
         level: 2,
         link: 'https://www.ableton.com/en/live/'
       }
@@ -194,7 +220,16 @@ const MasteryItemName: m.ClosureComponent<MasteryItemNameAttrs> = () => {
   return {
     view({ attrs }) {
       return [
-        m('div', attrs.name),
+        m('div', { class: 'item-icon' }, [
+          attrs.icon && [
+            m('img', {
+              class: 'item-icon-image',
+              src: attrs.icon,
+              alt: attrs.name
+            })
+          ]
+        ]),
+        m('div', { class: attrs.link && 'item-link-text' }, attrs.name),
         attrs.new && [
           m('div', { class: 'item-new' }, 'NEW')
         ]
