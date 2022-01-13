@@ -77,6 +77,7 @@ const TreeList: TreeNode[] = [
       {
         item: 'Godot',
         level: 1,
+        new: true,
         fav: true,
         link: 'https://godotengine.org/'
       }

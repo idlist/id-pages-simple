@@ -34,7 +34,6 @@ const ContactListItem: m.ClosureComponent<ContactListItemAttrs> = () => {
             })
           ]),
           m('div', { class: 'item-name' }, attrs.name),
-          m('div', { class: 'item-dash' }, '-'),
           m('div', { class: 'item-id' }, attrs.id)
         ])
       ]
