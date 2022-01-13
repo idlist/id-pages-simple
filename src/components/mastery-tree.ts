@@ -18,8 +18,8 @@ import icon_live from '@assets/skill-icons/live.svg'
 
 interface TreeItem {
   name: string
-  icon: string
-  level: number
+  level?: number
+  icon?: string
   new?: boolean
   fav?: boolean
   link?: string
@@ -27,7 +27,7 @@ interface TreeItem {
 
 interface TreeAspect {
   title: string
-  color: string,
+  color?: string,
   level?: number
   new?: boolean
   contents: TreeItem[]
@@ -263,10 +263,12 @@ const MasteryItem: m.ClosureComponent<MasteryItemAttrs> = () => {
               ])
             ]
           ,
-          m(SkillBar, {
-            level: attrs.level,
-            fav: attrs.fav
-          })
+          attrs.level && [
+            m(SkillBar, {
+              level: attrs.level,
+              fav: attrs.fav
+            })
+          ]
         ])
       ]
     }
@@ -282,7 +284,10 @@ const MasteryTreeAspect: m.ClosureComponent<MasteryTreeAspectAttrs> = () => {
         m('div', { class: 'aspect' }, [
           m('div', {
             class: 'aspect-container',
-            style: { backgroundColor: attrs.color }
+            style: {
+              backgroundColor: attrs.color,
+              boxShadow: `0 0 8px ${attrs.color}`
+            }
           }, [
             m('div', { class: 'aspect-info' }, [
               m('div', { class: 'aspect-title' }, attrs.title),
@@ -307,6 +312,7 @@ const MasteryTree: m.ClosureComponent = () => {
   return {
     view() {
       return [
+        m('div', { class: 'mastery-tree-title' }, 'Mastery Tree'),
         m('div', { class: 'mastery-tree' }, [
           ...TreeList.map(aspect => m(MasteryTreeAspect, { ...aspect }))
         ])

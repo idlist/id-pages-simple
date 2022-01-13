@@ -2,13 +2,22 @@
 
 .mastery-tree
   columns: 2
-  margin: 2rem 0
 
   @media (max-width: $screen-m)
     columns: 1
 
+  &-title
+    font-size: 1.25rem
+    text-align: center
+    text-transform: uppercase
+    letter-spacing: 4px
+
+    margin-top: 1rem
+    margin-bottom: 1rem
+
   .aspect
     break-inside: avoid
+    padding-top: 8px
 
   .aspect-container
     min-height: 1.5rem
@@ -23,6 +32,7 @@
 
     border-radius: 10rem
     background-color: #333
+    box-shadow: 0 0 8px #333
 
   .aspect-info
     display: flex
@@ -31,7 +41,6 @@
   .aspect-title
     color: #fff
     letter-spacing: 2px
-    text-transform: uppercase
 
   %badge
     font-size: 0.75rem
