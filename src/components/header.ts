@@ -57,7 +57,7 @@ const ContactListContents: ContactListItemAttrs[] = [
   {
     name: 'Blog',
     icon: icon_blog,
-    color: '#00896C',
+    color: '#5DAC81',
     id: 'Reinventing the Wheel',
     link: 'https://blog.idl.ist/'
   }

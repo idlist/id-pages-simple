@@ -78,7 +78,7 @@ const TreeList: TreeAspect[] = [
     contents: [
       {
         name: 'Godot',
-        level: 1,
+        level: 0.8,
         new: true,
         fav: true,
         link: 'https://godotengine.org/'
@@ -86,7 +86,7 @@ const TreeList: TreeAspect[] = [
     ]
   },
   {
-    title: 'Drawing & Graphics',
+    title: 'Graphics',
     level: 3,
     contents: [
       {
@@ -127,41 +127,113 @@ interface SkillLevelAttrs {
 const SkillBar: m.ClosureComponent<SkillLevelAttrs> = () => {
   return {
     view({ attrs }) {
-      const width = attrs.width ?? 400
+      const width = attrs.width ?? 160
       const height = 24
       const margin = 12
       const length = width - 2 * margin
 
-      const lineStyle = { stroke: '#ccc', strokeWidth: 2 }
-      const pointStyle = { fill: '#ccc' }
+      const styleLine = { stroke: '#ccc', strokeWidth: 2 }
+      const stylePoint = { fill: '#ccc' }
 
       return [
         m('svg', {
           width: width, height: height,
-          class: 'skill-level'
+          class: 'skill-bar'
         }, [
           m('line', {
             x1: margin, y1: margin,
             x2: width - margin, y2: margin,
-            style: lineStyle
+            style: styleLine
           }),
-          ...[0, 1].map(i => [
-            m('line', {
-              x1: margin + length * i, y1: 4,
-              x2: margin + length * i, y2: 20,
-              style: lineStyle
-            })
-          ]),
-          ...[1, 2, 3, 4].map(i => [
-            m('circle', {
-              cx: margin + length / 5 * i, cy: height / 2, r: 4,
-              style: pointStyle
-            })
-          ]),
+          ...[0, 1].map(i => {
+            const lx = Math.round(margin + length * i)
+
+            return [
+              m('line', {
+                x1: lx, y1: 6,
+                x2: lx, y2: 18,
+                style: styleLine
+              })
+            ]
+          }),
+          ...[1, 2, 3, 4].map(i => {
+            const size = 5
+            const px = Math.round(margin + length / 5 * i)
+            const py = height / 2
+
+            return [
+              m('rect', {
+                x: px - size / 2,
+                y: py - size / 2,
+                width: size,
+                height: size,
+                style: stylePoint,
+                transform: `rotate(45, ${px}, ${py})`
+              })
+            ]
+          }),
           m('image', {
             x: margin + length / 5 * attrs.level - 8, y: 4,
             width: 16, height: 16,
             href: attrs.fav ? svg_heart : svg_star
+          })
+        ])
+      ]
+    }
+  }
+}
+
+interface MasteryTreeAspectAttrs {
+  aspect: TreeAspect
+}
+
+const MasteryTreeAspect: m.ClosureComponent<MasteryTreeAspectAttrs> = () => {
+  return {
+    view({ attrs }) {
+      const aspect = attrs.aspect
+
+      return [
+        m('div', { class: 'aspect' }, [
+          m('div', { class: 'aspect-container' }, [
+            m('div', { class: 'aspect-info' }, [
+              m('div', { class: 'aspect-title' }, aspect.title),
+              aspect.new && [
+                m('div', { class: 'aspect-new' }, 'NEW')
+              ]
+            ]),
+            aspect.level && [
+              m(SkillBar, { level: aspect.level })
+            ]
+          ]),
+          m('div', { class: 'aspect-content' }, [
+            ...aspect.contents.map(item => m(MasteryTreeItem, { item: item }))
+          ])
+        ])
+      ]
+    }
+  }
+}
+
+interface MasteryTreeItemAttrs {
+  item: TreeItem
+}
+
+const MasteryTreeItem: m.ClosureComponent<MasteryTreeItemAttrs> = () => {
+  return {
+    view({ attrs }) {
+      const item = attrs.item
+
+      return [
+        m('div', { class: 'item' }, [
+          m('div', { class: 'item-info' }, [
+            m('div', item.name),
+            item.new && [
+              m('div', { class: 'item-new' }, 'NEW')
+            ]
+          ]),
+          m(SkillBar, {
+            level: item.level,
+            fav: item.fav
           })
         ])
       ]
@@ -174,27 +246,7 @@ const MasteryTree: m.ClosureComponent = () => {
     view() {
       return [
         m('div', { class: 'mastery-tree' }, [
-          ...TreeList.map(aspect => [
-            m('div', { class: 'aspect' }, [
-              m('div', { class: 'aspect-title' }, aspect.title),
-              aspect.level && [
-                m(SkillBar, {
-                  level: aspect.level
-                })
-              ]
-            ]),
-            m('div', { class: 'aspect-content' }, [
-              ...aspect.contents.map(item => [
-                m('div', { class: 'item' }, [
-                  m('div', item.name),
-                  m(SkillBar, {
-                    level: item.level,
-                    fav: item.fav
-                  })
-                ])
-              ])
-            ])
-          ])
+          ...TreeList.map(aspect => m(MasteryTreeAspect, { aspect: aspect }))
         ])
       ]
     }

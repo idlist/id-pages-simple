@@ -1,11 +1,18 @@
 @import ../variables
 
 .mastery-tree
+  columns: 2
   margin: 2rem 0
 
+  @media (max-width: $screen-m)
+    columns: 1
+
   .aspect
+    break-inside: avoid
+
+  .aspect-container
     display: grid
-    grid-template-columns: 1fr 3fr
+    grid-template-columns: max-content auto
     column-gap: 0.5rem
     align-items: center
 
@@ -13,24 +20,52 @@
     padding-left: 1rem
 
     border-radius: 10rem
-
-    color: #fff
     background-color: #333
+
+  .aspect-info
+    display: flex
+    column-gap: 0.5rem
+
+  .aspect-title
+    color: #fff
+    letter-spacing: 2px
+    text-transform: uppercase
+
+  %badge
+    font-size: 0.75rem
+    font-weight: bold
+    padding: 0.125rem 0.375rem
+    border-radius: 1rem
+    letter-spacing: -0.5px
+
+  .aspect-new
+    @extend %badge
+
+    color: #268785
+    background-color: #fff
 
   .aspect-content
     padding: 0.5rem 1rem
 
   .item
     display: grid
-    grid-template-columns: 1fr 3fr
+    grid-template-columns: max-content auto
+    column-gap: 0.5rem
+    row-gap: 0.5rem
     align-items: center
 
     padding: 0.5rem 0
 
-    @media (max-width: $screen-s)
-      grid-template-columns: 1fr 1fr
-      row-gap: 0.5rem
+  .item-info
+    display: flex
+    column-gap: 0.5rem
 
-.skill-level
-  justify-self: end
-  border-radius: 10rem
+  .item-new
+    @extend %badge
+
+    color: #fff
+    background-color: #268785
+
+  .skill-bar
+    justify-self: end
+    border-radius: 10rem
