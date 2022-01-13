@@ -1,5 +1,7 @@
 import m from 'mithril'
 import './mastery-tree.sass'
+import SectionTitle from './section-title'
+
 import svg_star from '@assets/skill-bar/star.svg'
 import svg_heart from '@assets/skill-bar/heart.svg'
 import icon_chinese from '@assets/skill-icons/chinese.svg'
@@ -312,7 +314,7 @@ const MasteryTree: m.ClosureComponent = () => {
   return {
     view() {
       return [
-        m('div', { class: 'mastery-tree-title' }, 'Mastery Tree'),
+        m(SectionTitle, { title: 'Mastery Tree' }),
         m('div', { class: 'mastery-tree' }, [
           ...TreeList.map(aspect => m(MasteryTreeAspect, { ...aspect }))
         ])

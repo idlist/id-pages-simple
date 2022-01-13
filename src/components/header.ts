@@ -1,5 +1,6 @@
 import m from 'mithril'
 import './header.sass'
+
 import image_idlist from '@assets/idlist.png'
 import icon_email from '@assets/icons/email.svg'
 import icon_blog from '@assets/icons/blog.svg'
@@ -13,7 +14,6 @@ interface ContactListItemAttrs {
   id: string
   link: string
   color?: string
-  external?: boolean
 }
 
 const ContactListItem: m.ClosureComponent<ContactListItemAttrs> = () => {
@@ -23,7 +23,7 @@ const ContactListItem: m.ClosureComponent<ContactListItemAttrs> = () => {
         m('a', {
           class: 'contact-list-item',
           href: attrs.link,
-          target: 'external' in attrs ? (attrs.external ? '_blank' : '_self') : '_blank',
+          target: '_self',
           noreferer: true,
           noopener: true
         }, [
@@ -51,16 +51,14 @@ const ContactListContents: ContactListItemAttrs[] = [
     icon: icon_email,
     id: 'me@idl.ist',
     color: '#3A8FB7',
-    link: 'mailto:me@idl.ist',
-    external: false
+    link: 'mailto:me@idl.ist'
   },
   {
     name: 'Blog',
     icon: icon_blog,
     color: '#00887d',
     id: 'Reinventing the Wheel',
-    link: 'https://blog.idl.ist/',
-    external: false
+    link: 'https://blog.idl.ist/'
   }
 ]
 
