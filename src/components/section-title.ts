@@ -9,7 +9,7 @@ const SectionTitle: m.ClosureComponent<SectionTitleAttrs> = () => {
   return {
     view({ attrs }) {
       return [
-        m('div', { class: 'section-title' }, [
+        m('h2', { class: 'section-title' }, [
           attrs.title
             ? [
               m('div', { class: 'section-title-side' }),
