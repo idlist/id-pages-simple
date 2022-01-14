@@ -10,6 +10,7 @@ import icon_japanese from '@assets/skill-icons/japanese.svg'
 import icon_mithril from '@assets/skill-icons/mithril.svg'
 import icon_react from '@assets/skill-icons/react.svg'
 import icon_vue from '@assets/skill-icons/vue.svg'
+import icon_sass from '@assets/skill-icons/sass.svg'
 import icon_vite from '@assets/skill-icons/vite.svg'
 import icon_koishi from '@assets/skill-icons/koishi.svg'
 import icon_godot from '@assets/skill-icons/godot.svg'
@@ -37,7 +38,7 @@ interface TreeAspect {
 
 const TreeList: TreeAspect[] = [
   {
-    title: 'Language',
+    title: 'Languages',
     color: '#9A5034',
     contents: [
       {
@@ -80,6 +81,12 @@ const TreeList: TreeAspect[] = [
         icon: icon_vue,
         level: 1,
         link: 'https://v3.vuejs.org/'
+      },
+      {
+        name: 'Sass',
+        icon: icon_sass,
+        level: 3.5,
+        link: 'https://sass-lang.com/'
       },
       {
         name: 'Vite',
@@ -253,8 +260,7 @@ const MasteryItem: m.ClosureComponent<MasteryItemAttrs> = () => {
                 class: 'item-link',
                 href: attrs.link,
                 target: '_blank',
-                noreferer: true,
-                noopener: true
+                rel: 'noopener noreferer'
               }, [
                 m(MasteryItemName, { ...attrs })
               ])

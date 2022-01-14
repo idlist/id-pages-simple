@@ -16,35 +16,6 @@ interface ContactListItemAttrs {
   color?: string
 }
 
-const ContactListItem: m.ClosureComponent<ContactListItemAttrs> = () => {
-  return {
-    view({ attrs }) {
-      return [
-        m('a', {
-          class: 'contact-list-item',
-          href: attrs.link,
-          target: '_self',
-          noreferer: true,
-          noopener: true
-        }, [
-          m('div', { class: 'item-icon' }, [
-            m('img', {
-              class: 'item-icon-image',
-              src: attrs.icon,
-              alt: attrs.name
-            })
-          ]),
-          m('div', {
-            class: 'item-name',
-            style: { backgroundColor: attrs.color }
-          }, attrs.name),
-          m('div', { class: 'item-id' }, attrs.id)
-        ])
-      ]
-    }
-  }
-}
-
 const ContactListContents: ContactListItemAttrs[] = [
   {
     name: 'Email',
@@ -73,7 +44,7 @@ const SocialMediaContents: ContactListItemAttrs[] = [
   {
     name: 'GitHub',
     icon: icon_github,
-    color: '#66327C',
+    color: '#6F3381',
     id: 'i\'DLisT',
     link: 'https://github.com/idlist'
   },
@@ -85,6 +56,33 @@ const SocialMediaContents: ContactListItemAttrs[] = [
     link: 'https://soundcloud.com/idlist'
   }
 ]
+
+const ContactListItem: m.ClosureComponent<ContactListItemAttrs> = () => {
+  return {
+    view({ attrs }) {
+      return [
+        m('a', {
+          class: 'contact-list-item',
+          href: attrs.link,
+          rel: 'noopener noreferer'
+        }, [
+          m('div', { class: 'item-icon' }, [
+            m('img', {
+              class: 'item-icon-image',
+              src: attrs.icon,
+              alt: attrs.name
+            })
+          ]),
+          m('div', {
+            class: 'item-name',
+            style: { backgroundColor: attrs.color }
+          }, attrs.name),
+          m('div', { class: 'item-id' }, attrs.id)
+        ])
+      ]
+    }
+  }
+}
 
 const Header: m.ClosureComponent = () => {
   return {

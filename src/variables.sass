@@ -6,8 +6,33 @@ $screen-l: 1024px
 
 // Sass Placeholders.
 
-%card-display
+%card-title
+  display: flex
+  align-items: center
+
+  min-height: 1.5rem
+  padding: 0.5rem
+  padding-left: 1rem
+
+  color: var(--color-text-inverted)
+  text-transform: uppercase
+  letter-spacing: 2px
+
+  border-radius: 2rem
+  background-color: var(--color-placeholder)
+  box-shadow: 0 0 8px var(--color-placeholder)
+
+%card-container
   padding: 0.75rem 1rem
   border: 1px solid var(--color-border)
   border-radius: 1.5rem
   background-color: #fff
+
+%default-link
+  color: var(--color-text)
+
+  &:hover
+    color: var(--color-link-hover)
+
+  &:active
+    color: var(--color-link-active)

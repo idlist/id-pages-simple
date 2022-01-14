@@ -2,7 +2,7 @@ import m from 'mithril'
 import './root-layout.sass'
 import Header from './header'
 import MasteryTree from './mastery-tree'
-import Footer from './footer'
+import About from './about'
 
 const RootLayout: m.ClosureComponent = () => {
   return {
@@ -11,7 +11,7 @@ const RootLayout: m.ClosureComponent = () => {
         m('div', { class: 'container' }, [
           m(Header),
           m(MasteryTree),
-          m(Footer)
+          m(About)
         ])
       ]
     }
