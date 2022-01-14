@@ -1,5 +1,5 @@
 import m from 'mithril'
-import './footer'
+import './footer.sass'
 import SectionTitle from './section-title'
 
 const Footer: m.ClosureComponent = () => {
@@ -8,7 +8,7 @@ const Footer: m.ClosureComponent = () => {
       return [
         m(SectionTitle, { title: 'About' }),
         m('footer', { class: 'footer' }, [
-
+          m('div', 'sample text')
         ])
       ]
     }

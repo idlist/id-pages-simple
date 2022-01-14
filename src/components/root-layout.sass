@@ -1,24 +1,24 @@
-@import ../variables
+@use '../variables' as *
 
 #root
   display: flex
   justify-content: center
 
   font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
-  background-color: #f8f8f8
+  background-color: var(--color-background)
 
 a
-  color: #333
+  color: var(--color-text)
 
   &:hover
-    color: #999
+    color: var(--color-link-hover)
 
   &:active
-    color: #ccc
+    color: var(--color-link-active)
 
 .container
   margin: 1rem
 
   width: 100%
   max-width: $screen-l
-  color: #333
+  color: var(--color-text)

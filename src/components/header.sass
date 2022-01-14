@@ -1,4 +1,4 @@
-@import ../variables
+@use '../variables' as *
 
 .header
   display: grid
@@ -18,7 +18,7 @@
 
 .header-icon
     border-radius: 50%
-    box-shadow: 0px 0px 12px #999
+    box-shadow: 0px 0px 12px var(--color-border)
     background-color: #fff
 
 .header-icon-image
@@ -26,7 +26,7 @@
     height: 8rem
 
 .contact-list
-  min-height: 10rem
+  @extend %card-display
 
   display: grid
   row-gap: 0.75rem
@@ -37,14 +37,13 @@
   margin: 0.25rem 1rem
 
   border: none
-  border-bottom: 1px solid #ccc
+  border-bottom: 1px solid var(--color-border)
 
 .contact-list-item
   display: flex
   column-gap: 0.75rem
   align-items: center
 
-  color: #333
   text-decoration: none
 
   .item-icon
@@ -61,15 +60,12 @@
     display: grid
     justify-content: center
 
-    min-width: 6rem
+    min-width: 5.5rem
     padding: 0.25rem
     border-radius: 1rem
 
-    color: #fff
+    color: var(--color-text-inverted)
     background-color: #333
 
   .item-id
     text-decoration: underline
-
-  &:hover .item-id
-    color: #999

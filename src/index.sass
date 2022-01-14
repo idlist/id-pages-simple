@@ -1,4 +1,6 @@
-@import ../node_modules/normalize.css/normalize.css
+@use '../node_modules/normalize.css/normalize.css'
+
+// Fonts.
 
 @font-face
   font-family: 'Open Sans'
@@ -11,3 +13,17 @@
   src: url('/fonts/open-sans-bold.woff2') format('woff2')
   font-weight: bold
   font-style: normal
+
+// CSS variables.
+
+:root
+  --color-theme: #268785
+
+  --color-background: #eee
+  --color-card: #fff
+  --color-border: #bbb
+
+  --color-text: #333
+  --color-text-inverted: #fff
+  --color-link-hover: #999
+  --color-link-active: #bbb
