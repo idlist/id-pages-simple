@@ -308,7 +308,9 @@ const MasteryTreeAspect: m.ClosureComponent<MasteryTreeAspectAttrs> = () => {
             ]
           ]),
           m('div', { class: 'aspect-content' }, [
-            ...attrs.contents.map(item => m(MasteryItem, { ...item }))
+            ...attrs.contents.map(item => [
+              m(MasteryItem, { ...item })
+            ])
           ])
         ])
       ]
@@ -322,7 +324,9 @@ const MasteryTree: m.ClosureComponent = () => {
       return [
         m(SectionTitle, { title: 'Mastery Tree' }),
         m('div', { class: 'mastery-tree' }, [
-          ...TreeList.map(aspect => m(MasteryTreeAspect, { ...aspect }))
+          ...TreeList.map(aspect => [
+            m(MasteryTreeAspect, { ...aspect })
+          ])
         ])
       ]
     }

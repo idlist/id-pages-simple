@@ -12,7 +12,7 @@ const RootLayout: m.ClosureComponent = () => {
         m('div', { class: 'container' }, [
           m(Header),
           m(MasteryTree),
-          // m(SkillWishlist),
+          m(SkillWishlist),
           m(About)
         ])
       ]
